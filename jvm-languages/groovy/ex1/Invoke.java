@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class Invoke {
+public class Invoke {
+    public static void main(String[] args) {
+        
+    }
 }
