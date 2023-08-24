@@ -1,0 +1,32 @@
+networks:
+  fpl-sandbox-network:
+    name: fpl-sandbox-network-1
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.0.0/16
+
+services:
+  mysql-db:
+    image: mysql:8.1
+    ports:
+      - 3306:3306
+      - 33060:33060
+    volumes:
+      - mysql-db-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root123456
+      - MYSQL_DATABASE=fplsandbox
+      - MYSQL_USER=fplsandbox
+      - MYSQL_PASSWORD=fplsandbox
+      - MYSQL_INITDB_SKIP_TZINFO=true
+      - METADATA_LAUNCHER="onlyu - fpl - sandbox"
+    networks:
+      fpl-sandbox-network:
+        ipv4_address: 10.0.0.2
+
+volumes:
+  mysql-db-data:
+    name: mysql-db-data-1
+    labels:
+      database: "MySQL 8.1"
